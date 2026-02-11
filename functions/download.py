@@ -2,26 +2,26 @@ import pandas as pd
 import yfinance as yf
 
 def download_data(
-    ticker: str = 'SNFF11.SA'
+    ticker:str = 'TSLA'
 ) -> pd.DataFrame:
-    
     """
-    Download historical market data for a given ticker using yfinance.
+    Download historical stock data using yfinance.
 
     Parameters
     ----------
     ticker : str, optional
-        The ticker symbol to download data for (default is 'SNFF11.SA').
+        Stock ticker symbol (default is 'TSLA').
 
     Returns
     -------
-    pandas.DataFrame
-        A DataFrame containing the historical price data with the date as index.
+    pd.DataFrame
+        DataFrame containing historical stock data with columns:
+        Date, Open, High, Low, Close, Adj Close, Volume.
     """
-    
-    result = yf.download(
+    df = yf.download(
         ticker,
-        period='max'
+        period='max',
+        multi_level_index= False
     ).reset_index()
 
-    return result
+    return df
